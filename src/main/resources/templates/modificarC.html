@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Datos del cliente</title>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    </head>
+    <body class="bg-dark text-white">
+        <header th:replace="layout/plantilla :: header"></header>
+        <h2>Datos del cliente</h2>
+        <a class="btn btn-info" th:href="@{/cliente}">Regresar</a>
+        <br/>
+        
+        <form  class="form-group" th:action="@{/guardarC}" method="post" th:object="${cliente}">
+            <label for="cliente_id">Id: </label>
+            <input type="text" name="cliente_id" th:field="*{cliente_id}">
+            <br/>
+
+            <label for="nombres">Nombres: </label>
+            <input type="text" name="nombres" th:field="*{nombres}"/>
+            <span th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Error en el nombre</span>
+            <br/>
+
+            <label for="telefono">Telefono: </label>
+            <input type="text" name="telefono" th:field="*{telefono}"/>
+            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Error en el telefono</span>
+            <br/>
+            <input class="btn btn-success" type="submit" name="guardar" value="Guardar"/>
+        </form>
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

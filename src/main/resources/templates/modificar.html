@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="">
+    <head>
+        <title>Datos del producto</title>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    </head>
+    <body class="bg-dark text-white">
+
+        <div th:insert="layout/plantilla :: header"></div>
+
+        <h1>Datos del artículo</h1>
+        <a class="btn btn-info m-3" th:href="@{/articulo}">Regresar</a>
+        <br/>
+        <form th:action="@{/articulo/guardar}" method="post" th:object="${articulo}">
+            <input type="hidden" name="articulo_id" th:field="*{articulo_id}">
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre" th:field="*{nombre}"/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error en el nombre</span>
+            <br/>
+
+            <label for="precio">Precio: </label>
+            <input type="text" name="precio" th:field="*{precio}"/>
+            <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">Error en el precio</span>
+            <br/>
+
+            <label for="stock">Cantidad: </label>
+            <input type="text" name="stock" th:field="*{stock}"/>
+            <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">Error en el stock</span>
+            <br/>
+
+            <input class="btn btn-success" type="submit" name="guardar" value="Guardar"/>
+        </form>
+        <div th:insert="layout/plantilla :: footer"/>
+    </body>
+</html>
